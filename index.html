@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K3 Training – Bongkar Muat Interaktif</title>
+  <meta name="description" content="Media Pelatihan Mandiri Keselamatan dan Kesehatan Kerja (K3) untuk Karyawan Bongkar Muat berbasis multimedia interaktif." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== SCREEN: LANDING ===== -->
+<div id="screen-landing" class="screen active">
+  <div class="landing-bg">
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+  </div>
+  <div class="landing-content">
+    <div class="badge-top">
+      <span class="dot-pulse"></span>
+      SISTEM PELATIHAN MANDIRI AKTIF
+    </div>
+    <div class="logo-k3">
+      <div class="helm-icon">⛑️</div>
+    </div>
+    <h1 class="main-title">
+      <span class="title-k3">K3</span> Bongkar Muat
+    </h1>
+    <p class="subtitle">Keselamatan dan Kesehatan Kerja<br>Multimedia Interaktif Pelatihan Mandiri</p>
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Modul</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Simulasi</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">🏆</span>
+        <span class="stat-label">Sertifikat</span>
+      </div>
+    </div>
+    <button class="btn-primary btn-glow" id="btn-start" onclick="showScreen('screen-profile')">
+      <span>MULAI PELATIHAN</span>
+      <span class="btn-arrow">→</span>
+    </button>
+    <p class="landing-note">Selesaikan semua modul dan dapatkan sertifikat resmi pelatihan K3 Anda</p>
+  </div>
+  <div class="warning-strip">
+    <span>⚠ SAFETY FIRST</span><span>⚠ KESELAMATAN ADALAH PRIORITAS</span>
+    <span>⚠ SAFETY FIRST</span><span>⚠ KESELAMATAN ADALAH PRIORITAS</span>
+    <span>⚠ SAFETY FIRST</span><span>⚠ KESELAMATAN ADALAH PRIORITAS</span>
+  </div>
+</div>
+
+<!-- ===== SCREEN: PROFILE ===== -->
+<div id="screen-profile" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="showScreen('screen-landing')">← Kembali</button>
+    <h2>Data Peserta</h2>
+    <div></div>
+  </div>
+  <div class="profile-container">
+    <div class="profile-card">
+      <div class="profile-icon">👷</div>
+      <h2>Identitas Karyawan</h2>
+      <p>Isi data Anda sebelum memulai pelatihan K3</p>
+      <div class="form-group">
+        <label for="inp-name">Nama Lengkap</label>
+        <input type="text" id="inp-name" placeholder="Masukkan nama lengkap Anda" />
+      </div>
+      <div class="form-group">
+        <label for="inp-unit">Unit / Divisi</label>
+        <input type="text" id="inp-unit" placeholder="Contoh: Divisi Bongkar Muat – Pelabuhan Tanjung Priok" />
+      </div>
+      <div class="form-group">
+        <label for="inp-date">Tanggal Pelatihan</label>
+        <input type="date" id="inp-date" />
+      </div>
+      <button class="btn-primary" id="btn-profile-next" onclick="submitProfile()">
+        Lanjut ke Pelatihan →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: MODULE MAP ===== -->
+<div id="screen-modules" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="showScreen('screen-profile')">← Profil</button>
+    <h2>Peta Modul Pelatihan</h2>
+    <div class="user-chip" id="user-chip">👷 —</div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <span class="progress-label" id="progress-label">0% Selesai</span>
+  </div>
+  <div class="modules-grid">
+    <div class="module-card" id="mc-1" onclick="startModule(1)">
+      <div class="mod-icon">🦺</div>
+      <div class="mod-info">
+        <h3>Modul 1</h3>
+        <p>Pengenalan & Standar APD</p>
+      </div>
+      <div class="mod-status" id="ms-1">○</div>
+    </div>
+    <div class="module-card locked" id="mc-2" onclick="startModule(2)">
+      <div class="mod-icon">⚠️</div>
+      <div class="mod-info">
+        <h3>Modul 2</h3>
+        <p>Identifikasi Bahaya (Hazard Spotting)</p>
+      </div>
+      <div class="mod-status" id="ms-2">🔒</div>
+    </div>
+    <div class="module-card locked" id="mc-3" onclick="startModule(3)">
+      <div class="mod-icon">📋</div>
+      <div class="mod-info">
+        <h3>Modul 3</h3>
+        <p>Prosedur Keselamatan Bongkar Muat</p>
+      </div>
+      <div class="mod-status" id="ms-3">🔒</div>
+    </div>
+    <div class="module-card locked" id="mc-4" onclick="startModule(4)">
+      <div class="mod-icon">📝</div>
+      <div class="mod-info">
+        <h3>Evaluasi Akhir</h3>
+        <p>Kuis & Uji Kompetensi K3</p>
+      </div>
+      <div class="mod-status" id="ms-4">🔒</div>
+    </div>
+  </div>
+  <div class="tip-box">
+    <span class="tip-icon">💡</span>
+    <span>Selesaikan modul secara berurutan untuk membuka modul berikutnya.</span>
+  </div>
+</div>
+
+<!-- ===== SCREEN: MODULE 1 – APD ===== -->
+<div id="screen-mod1" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="showScreen('screen-modules')">← Modul</button>
+    <h2>🦺 Modul 1: Pengenalan APD</h2>
+    <div class="mod-badge">M1</div>
+  </div>
+  <div class="mod1-container">
+    <!-- Slide Info -->
+    <div class="slides-wrap" id="m1-slides">
+      <!-- Slide 1 -->
+      <div class="slide active" id="m1-slide-1">
+        <div class="slide-content">
+          <div class="slide-number">01 / 04</div>
+          <h2>Apa itu APD?</h2>
+          <div class="slide-icon-big">🛡️</div>
+          <p><strong>Alat Pelindung Diri (APD)</strong> adalah kelengkapan wajib yang digunakan saat bekerja untuk menjaga keselamatan jiwa dan kesehatan pekerja.</p>
+          <div class="highlight-box yellow">
+            ⚠️ Berdasarkan UU No. 1 Tahun 1970 tentang Keselamatan Kerja, penggunaan APD adalah <strong>KEWAJIBAN</strong> bagi setiap pekerja di area berbahaya.
+          </div>
+          <button class="btn-next-slide" onclick="nextSlide('m1',2)">Lanjut →</button>
+        </div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="slide" id="m1-slide-2">
+        <div class="slide-content">
+          <div class="slide-number">02 / 04</div>
+          <h2>APD Wajib Area Bongkar Muat</h2>
+          <div class="apd-grid">
+            <div class="apd-item">
+              <div class="apd-icon">⛑️</div>
+              <h4>Helm Safety</h4>
+              <p>Melindungi kepala dari benturan dan benda jatuh dari ketinggian</p>
+            </div>
+            <div class="apd-item">
+              <div class="apd-icon">👟</div>
+              <h4>Sepatu Safety</h4>
+              <p>Pelindung kaki dari benda berat, benda tajam, dan paparan listrik</p>
+            </div>
+            <div class="apd-item">
+              <div class="apd-icon">🦺</div>
+              <h4>Rompi Hi-Vis</h4>
+              <p>Membuat pekerja terlihat jelas oleh operator alat berat dan kendaraan</p>
+            </div>
+            <div class="apd-item">
+              <div class="apd-icon">🧤</div>
+              <h4>Sarung Tangan</h4>
+              <p>Melindungi tangan dari luka, gesekan kawat baja, dan bahan berbahaya</p>
+            </div>
+            <div class="apd-item">
+              <div class="apd-icon">😷</div>
+              <h4>Masker Debu</h4>
+              <p>Melindungi saluran pernapasan dari debu batu bara, semen, dan B3</p>
+            </div>
+            <div class="apd-item">
+              <div class="apd-icon">🥽</div>
+              <h4>Kacamata Safety</h4>
+              <p>Melindungi mata dari percikan api, serpihan benda, dan sinar UV</p>
+            </div>
+          </div>
+          <button class="btn-next-slide" onclick="nextSlide('m1',3)">Lanjut →</button>
+        </div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="slide" id="m1-slide-3">
+        <div class="slide-content">
+          <div class="slide-number">03 / 04</div>
+          <h2>Safety Harness – APD Khusus Ketinggian</h2>
+          <div class="slide-icon-big">🔗</div>
+          <p>Pekerja bongkar muat yang bekerja di ketinggian <strong>>2 meter</strong> (naik ke geladak kapal, panjat crane, bekerja di atas kontainer) WAJIB menggunakan:</p>
+          <div class="harness-list">
+            <div class="harness-item ok">✅ Full Body Harness – tali pengikat tubuh lengkap</div>
+            <div class="harness-item ok">✅ Lanyard – tali pengaman ke titik angkur</div>
+            <div class="harness-item ok">✅ Anchor Point – titik kait yang telah diuji beban minimum 15 kN</div>
+            <div class="harness-item danger">❌ Dilarang menggunakan tali biasa sebagai pengganti harness!</div>
+          </div>
+          <div class="highlight-box red">
+            🚨 Menurut data BPS 2023, 34% kecelakaan kerja di sektor pelabuhan disebabkan oleh <strong>jatuh dari ketinggian</strong> akibat tidak memakai harness.
+          </div>
+          <button class="btn-next-slide" onclick="nextSlide('m1',4)">Lanjut →</button>
+        </div>
+      </div>
+      <!-- Slide 4: Simulasi -->
+      <div class="slide" id="m1-slide-4">
+        <div class="slide-content">
+          <div class="slide-number">04 / 04 — SIMULASI</div>
+          <h2>🎮 Simulasi: Lengkapi APD Pekerja</h2>
+          <p>Pilih semua APD yang <strong>wajib digunakan</strong> pekerja saat bongkar muat di area pelabuhan. Klik kotak APD yang diperlukan!</p>
+          <div class="apd-sim-grid" id="apd-sim-grid">
+            <div class="apd-sim-item" data-apd="helm" data-required="true" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">⛑️</span>
+              <span>Helm Safety</span>
+            </div>
+            <div class="apd-sim-item" data-apd="sepatu" data-required="true" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">👟</span>
+              <span>Sepatu Safety</span>
+            </div>
+            <div class="apd-sim-item" data-apd="rompi" data-required="true" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">🦺</span>
+              <span>Rompi Hi-Vis</span>
+            </div>
+            <div class="apd-sim-item" data-apd="sarung" data-required="true" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">🧤</span>
+              <span>Sarung Tangan</span>
+            </div>
+            <div class="apd-sim-item" data-apd="masker" data-required="true" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">😷</span>
+              <span>Masker Debu</span>
+            </div>
+            <div class="apd-sim-item" data-apd="kacamata" data-required="true" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">🥽</span>
+              <span>Kacamata</span>
+            </div>
+            <div class="apd-sim-item" data-apd="topi" data-required="false" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">🎩</span>
+              <span>Topi Biasa</span>
+            </div>
+            <div class="apd-sim-item" data-apd="sandal" data-required="false" onclick="toggleAPD(this)">
+              <span class="apd-sim-icon">🩴</span>
+              <span>Sandal Jepit</span>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="checkAPD()">✅ Cek Kelengkapan APD</button>
+          <div id="apd-result" class="sim-result hidden"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: MODULE 2 – HAZARD SPOTTING ===== -->
+<div id="screen-mod2" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="showScreen('screen-modules')">← Modul</button>
+    <h2>⚠️ Modul 2: Identifikasi Bahaya</h2>
+    <div class="mod-badge" style="background:#f59e0b">M2</div>
+  </div>
+  <div class="hazard-container">
+    <div class="hazard-intro" id="hazard-intro">
+      <div class="slide-icon-big">🔍</div>
+      <h2>Hazard Spotting Game</h2>
+      <p>Temukan semua <strong>potensi bahaya</strong> yang tersembunyi dalam ilustrasi area kerja bongkar muat berikut. Klik pada area yang Anda anggap berbahaya!</p>
+      <div class="hazard-score-row">
+        <span>Bahaya Ditemukan: <strong id="hazard-found">0</strong> / <strong id="hazard-total">7</strong></span>
+        <span id="hazard-status-text" class="status-pending">Belum Mulai</span>
+      </div>
+      <button class="btn-primary" onclick="startHazardGame()">🚀 Mulai Game →</button>
+    </div>
+
+    <div class="hazard-game hidden" id="hazard-game">
+      <div class="hazard-score-row">
+        <span>🎯 Bahaya Ditemukan: <strong id="hf2">0</strong> / 7</span>
+        <span id="hazard-timer" class="timer-display">⏱ 00:00</span>
+      </div>
+      <div class="hazard-scene" id="hazard-scene">
+        <!-- Area kerja bongkar muat sebagai SVG interaktif -->
+        <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" class="hazard-svg" id="hazard-svg">
+          <!-- Background: Pelabuhan -->
+          <rect width="900" height="520" fill="#1a2332"/>
+          <!-- Langit -->
+          <rect width="900" height="200" fill="#0f1923"/>
+          <!-- Matahari -->
+          <circle cx="780" cy="60" r="40" fill="#fbbf24" opacity="0.9"/>
+          <!-- Dermaga / lantai -->
+          <rect y="300" width="900" height="220" fill="#2d3748"/>
+          <!-- Garis dermaga -->
+          <rect y="298" width="900" height="6" fill="#4a5568"/>
+          <!-- Kontainer 1 (merah) -->
+          <rect x="50" y="200" width="140" height="100" fill="#991b1b" rx="4"/>
+          <rect x="55" y="205" width="130" height="90" fill="#7f1d1d" rx="2"/>
+          <text x="120" y="255" fill="#fca5a5" font-size="11" text-anchor="middle" font-family="monospace">CONT-001</text>
+          <!-- Kontainer 2 (biru) -->
+          <rect x="210" y="200" width="140" height="100" fill="#1e3a8a" rx="4"/>
+          <rect x="215" y="205" width="130" height="90" fill="#1e40af" rx="2"/>
+          <text x="280" y="255" fill="#93c5fd" font-size="11" text-anchor="middle" font-family="monospace">CONT-002</text>
+          <!-- Kontainer 3 (hijau) -->
+          <rect x="370" y="200" width="140" height="100" fill="#14532d" rx="4"/>
+          <rect x="375" y="205" width="130" height="90" fill="#166534" rx="2"/>
+          <text x="440" y="255" fill="#86efac" font-size="11" text-anchor="middle" font-family="monospace">CONT-003</text>
+          <!-- Kontainer tumpuk atas (tidak stabil) -->
+          <rect x="200" y="130" width="140" height="75" fill="#92400e" rx="4" transform="rotate(4 270 170)"/>
+          <text x="270" y="170" fill="#fde68a" font-size="10" text-anchor="middle" font-family="monospace">CONT-004</text>
+          <!-- Crane -->
+          <rect x="640" y="50" width="16" height="260" fill="#374151"/>
+          <rect x="560" y="50" width="100" height="14" fill="#374151"/>
+          <line x1="600" y1="64" x2="600" y2="200" stroke="#9ca3af" stroke-width="3"/>
+          <!-- Beban gantung crane -->
+          <rect x="575" y="195" width="50" height="35" fill="#78350f" rx="3"/>
+          <text x="600" y="216" fill="#fde68a" font-size="9" text-anchor="middle">BEBAN</text>
+          <!-- Forklift -->
+          <rect x="480" y="280" width="90" height="55" fill="#b45309" rx="5"/>
+          <rect x="485" y="268" width="12" height="15" fill="#92400e"/>
+          <rect x="510" y="268" width="12" height="15" fill="#92400e"/>
+          <circle cx="500" cy="338" r="12" fill="#374151"/>
+          <circle cx="555" cy="338" r="12" fill="#374151"/>
+          <text x="525" y="312" fill="#fef3c7" font-size="9" text-anchor="middle">FORKLIFT</text>
+          <!-- Pekerja 1 (tanpa helm - BAHAYA 1) -->
+          <circle cx="150" cy="278" r="12" fill="#f9a8d4"/>
+          <rect x="143" y="290" width="14" height="30" fill="#1e40af"/>
+          <!-- Pekerja 2 (dengan helm) -->
+          <circle cx="320" cy="278" r="12" fill="#f9a8d4"/>
+          <ellipse cx="320" cy="268" rx="14" ry="7" fill="#facc15"/>
+          <rect x="313" y="290" width="14" height="30" fill="#166534"/>
+          <!-- Pekerja 3 (di bawah beban crane - BAHAYA 2) -->
+          <circle cx="600" cy="278" r="12" fill="#f9a8d4"/>
+          <ellipse cx="600" cy="268" rx="14" ry="7" fill="#facc15"/>
+          <rect x="593" y="290" width="14" height="30" fill="#374151"/>
+          <!-- Tumpahan oli - BAHAYA 3 -->
+          <ellipse cx="410" cy="360" rx="50" ry="14" fill="#1e1b4b" opacity="0.85"/>
+          <text x="410" y="363" fill="#818cf8" font-size="9" text-anchor="middle">OLI</text>
+          <!-- Kabel terkelupas - BAHAYA 4 -->
+          <path d="M700 350 Q720 330 740 360 Q760 340 780 360" stroke="#ef4444" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <text x="740" y="385" fill="#fca5a5" font-size="9" text-anchor="middle">KABEL LISTRIK</text>
+          <!-- APAR hilang / kosong - BAHAYA 5 -->
+          <rect x="820" y="270" width="24" height="50" fill="#4b5563" rx="3"/>
+          <text x="832" y="296" fill="#9ca3af" font-size="8" text-anchor="middle">APAR</text>
+          <text x="832" y="308" fill="#ef4444" font-size="8" text-anchor="middle">KOSONG</text>
+          <!-- Jalur pejalan kaki tidak ada marka - BAHAYA 6 -->
+          <rect x="100" y="305" width="350" height="40" fill="#374151" opacity="0.5"/>
+          <!-- Kontainer tidak bersegel / bocor - BAHAYA 7 (barrel tumpah) -->
+          <ellipse cx="770" cy="310" rx="18" ry="22" fill="#6b21a8"/>
+          <ellipse cx="770" cy="320" rx="25" ry="8" fill="#581c87" opacity="0.8"/>
+          <text x="770" y="308" fill="#e9d5ff" font-size="8" text-anchor="middle">B3</text>
+          <!-- Label area berbahaya ditandai dengan lingkaran merah berkedip (JS akan tambah) -->
+          <!-- Tanda zona aman tidak ada -->
+          <text x="450" y="490" fill="#64748b" font-size="11" text-anchor="middle" font-family="sans-serif">⚠ Klik area yang Anda anggap berbahaya dalam gambar di atas</text>
+        </svg>
+
+        <!-- Hotspot areas (invisible clickable zones) -->
+        <div class="hazard-hotspot" id="hs-1" data-id="1" style="left:112px;top:230px;width:80px;height:80px" onclick="hitHazard(1)" title="Klik jika menemukan bahaya">
+          <div class="hs-ring"></div>
+        </div>
+        <div class="hazard-hotspot" id="hs-2" data-id="2" style="left:565px;top:230px;width:80px;height:80px" onclick="hitHazard(2)">
+          <div class="hs-ring"></div>
+        </div>
+        <div class="hazard-hotspot" id="hs-3" data-id="3" style="left:360px;top:340px;width:110px;height:55px" onclick="hitHazard(3)">
+          <div class="hs-ring"></div>
+        </div>
+        <div class="hazard-hotspot" id="hs-4" data-id="4" style="left:690px;top:330px;width:110px;height:70px" onclick="hitHazard(4)">
+          <div class="hs-ring"></div>
+        </div>
+        <div class="hazard-hotspot" id="hs-5" data-id="5" style="left:808px;top:255px;width:60px;height:90px" onclick="hitHazard(5)">
+          <div class="hs-ring"></div>
+        </div>
+        <div class="hazard-hotspot" id="hs-6" data-id="6" style="left:80px;top:300px;width:380px;height:45px" onclick="hitHazard(6)">
+          <div class="hs-ring" style="border-radius:6px"></div>
+        </div>
+        <div class="hazard-hotspot" id="hs-7" data-id="7" style="left:190px;top:120px;width:160px;height:100px" onclick="hitHazard(7)">
+          <div class="hs-ring"></div>
+        </div>
+      </div>
+
+      <div id="hazard-popup" class="hazard-popup hidden">
+        <div class="hazard-popup-inner">
+          <span class="hazard-popup-icon" id="hp-icon"></span>
+          <div>
+            <strong id="hp-title"></strong>
+            <p id="hp-desc"></p>
+          </div>
+          <button onclick="closeHazardPopup()">✕</button>
+        </div>
+      </div>
+
+      <div id="hazard-complete" class="hazard-complete hidden">
+        <div class="complete-icon">🎉</div>
+        <h3>Semua Bahaya Ditemukan!</h3>
+        <p id="hc-time"></p>
+        <button class="btn-primary" onclick="completeModule(2)">Lanjut ke Modul 3 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: MODULE 3 – PROSEDUR ===== -->
+<div id="screen-mod3" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="showScreen('screen-modules')">← Modul</button>
+    <h2>📋 Modul 3: Prosedur Keselamatan</h2>
+    <div class="mod-badge" style="background:#10b981">M3</div>
+  </div>
+  <div class="proc-container">
+    <div class="proc-tabs">
+      <button class="proc-tab active" onclick="switchProcTab(1,'btn-pt-1')">Sebelum Kerja</button>
+      <button class="proc-tab" onclick="switchProcTab(2,'btn-pt-2')">Saat Kerja</button>
+      <button class="proc-tab" onclick="switchProcTab(3,'btn-pt-3')">Darurat</button>
+      <button class="proc-tab" onclick="switchProcTab(4,'btn-pt-4')">Quiz Cepat</button>
+    </div>
+
+    <!-- Tab 1: Sebelum Kerja -->
+    <div class="proc-tab-content active" id="proc-tab-1">
+      <h3>🔧 Prosedur Sebelum Memulai Kerja</h3>
+      <div class="checklist-proc" id="cl-before">
+        <div class="cl-item" onclick="toggleCheck(this)">
+          <span class="cl-check">○</span>
+          <div class="cl-text">
+            <strong>Safety Briefing Harian</strong>
+            <p>Lakukan safety briefing 10–15 menit sebelum shift dimulai, pastikan semua karyawan hadir dan memahami risiko hari ini.</p>
+          </div>
+        </div>
+        <div class="cl-item" onclick="toggleCheck(this)">
+          <span class="cl-check">○</span>
+          <div class="cl-text">
+            <strong>Pemeriksaan APD</strong>
+            <p>Cek kondisi semua APD: tidak ada retakan pada helm, tali harness tidak sobek/aus, sepatu safety masih kokoh dan tidak berlubang.</p>
+          </div>
+        </div>
+        <div class="cl-item" onclick="toggleCheck(this)">
+          <span class="cl-check">○</span>
+          <div class="cl-text">
+            <strong>Inspeksi Alat Kerja & Peralatan Bongkar Muat</strong>
+            <p>Periksa kondisi crane, forklift, sling kawat, spreader, dan semua peralatan angkat sebelum dioperasikan. Laporkan kerusakan ke supervisor.</p>
+          </div>
+        </div>
+        <div class="cl-item" onclick="toggleCheck(this)">
+          <span class="cl-check">○</span>
+          <div class="cl-text">
+            <strong>Identifikasi Manifes Kargo B3</strong>
+            <p>Periksa manifes muatan untuk mengidentifikasi bahan berbahaya dan beracun (B3). Pastikan prosedur penanganan khusus telah dipahami.</p>
+          </div>
+        </div>
+        <div class="cl-item" onclick="toggleCheck(this)">
+          <span class="cl-check">○</span>
+          <div class="cl-text">
+            <strong>Pastikan APAR Tersedia & Berfungsi</strong>
+            <p>Cek lokasi dan kondisi Alat Pemadam Api Ringan (APAR). Pastikan segel tidak rusak, tekanan manometer di zona hijau, dan belum kadaluarsa.</p>
+          </div>
+        </div>
+      </div>
+      <button class="btn-next-tab" onclick="switchProcTab(2)">Lanjut: Saat Kerja →</button>
+    </div>
+
+    <!-- Tab 2: Saat Kerja -->
+    <div class="proc-tab-content" id="proc-tab-2">
+      <h3>⚡ Prosedur Saat Bekerja</h3>
+      <div class="proc-cards">
+        <div class="proc-card">
+          <span class="pc-icon">🏗️</span>
+          <h4>Zona Pengangkatan (Lifting Zone)</h4>
+          <ul>
+            <li>Pasang barikade & rambu "Dilarang Masuk" di area bawah crane</li>
+            <li>Tidak boleh ada pekerja di bawah beban yang sedang diangkat</li>
+            <li>Operator crane wajib memiliki SIO (Surat Izin Operasi)</li>
+          </ul>
+        </div>
+        <div class="proc-card">
+          <span class="pc-icon">🚛</span>
+          <h4>Operasi Forklift & Kendaraan</h4>
+          <ul>
+            <li>Kecepatan maksimum 10 km/jam di area pelabuhan</li>
+            <li>Selalu prioritaskan pejalan kaki di jalur zebra cross</li>
+            <li>Dilarang mengangkut penumpang di atas garpu forklift</li>
+          </ul>
+        </div>
+        <div class="proc-card">
+          <span class="pc-icon">📦</span>
+          <h4>Prosedur Stacking Kontainer</h4>
+          <ul>
+            <li>Maksimum tumpukan 4 tier (4 kontainer ke atas)</li>
+            <li>Kontainer lebih berat di bagian bawah</li>
+            <li>Pastikan twist-lock terpasang antar kontainer</li>
+          </ul>
+        </div>
+        <div class="proc-card">
+          <span class="pc-icon">☠️</span>
+          <h4>Penanganan Kargo B3</h4>
+          <ul>
+            <li>Wajib membaca MSDS (Material Safety Data Sheet)</li>
+            <li>Gunakan APD khusus: masker respirator, pakaian tahan kimia</li>
+            <li>Simpan di area B3 yang terpisah dan berventilasi baik</li>
+          </ul>
+        </div>
+      </div>
+      <button class="btn-next-tab" onclick="switchProcTab(3)">Lanjut: Prosedur Darurat →</button>
+    </div>
+
+    <!-- Tab 3: Darurat -->
+    <div class="proc-tab-content" id="proc-tab-3">
+      <h3>🚨 Prosedur Keadaan Darurat</h3>
+      <div class="emergency-cards">
+        <div class="em-card">
+          <div class="em-header fire">🔥 KEBAKARAN</div>
+          <div class="em-body">
+            <div class="em-step"><span class="step-num">1</span>Aktivasi alarm kebakaran dan teriak "KEBAKARAN!"</div>
+            <div class="em-step"><span class="step-num">2</span>Hubungi damkar: <strong>119</strong></div>
+            <div class="em-step"><span class="step-num">3</span>Gunakan APAR jika api kecil dan aman dijangkau</div>
+            <div class="em-step"><span class="step-num">4</span>Evakuasi semua personel ke titik kumpul (Muster Point)</div>
+          </div>
+        </div>
+        <div class="em-card">
+          <div class="em-header accident">🩺 KECELAKAAN KERJA</div>
+          <div class="em-body">
+            <div class="em-step"><span class="step-num">1</span>Jangan panik. Amankan lokasi agar tidak terjadi kecelakaan kedua</div>
+            <div class="em-step"><span class="step-num">2</span>Hubungi tim P3K perusahaan dan ambulans: <strong>118</strong></div>
+            <div class="em-step"><span class="step-num">3</span>Berikan pertolongan pertama sesuai pelatihan jika memungkinkan</div>
+            <div class="em-step"><span class="step-num">4</span>Laporkan kejadian ke supervisor dan catat di buku kecelakaan</div>
+          </div>
+        </div>
+        <div class="em-card">
+          <div class="em-header spill">☣️ TUMPAHAN B3</div>
+          <div class="em-body">
+            <div class="em-step"><span class="step-num">1</span>Jauhkan semua personel dari area tumpahan</div>
+            <div class="em-step"><span class="step-num">2</span>Identifikasi jenis B3 dari label/MSDS</div>
+            <div class="em-step"><span class="step-num">3</span>Gunakan spill kit yang tersedia untuk membendung tumpahan</div>
+            <div class="em-step"><span class="step-num">4</span>Laporkan ke tim HSE dan ikuti prosedur pemulangan</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="switchProcTab(4)">Lanjut: Quiz Cepat →</button>
+    </div>
+
+    <!-- Tab 4: Quiz Cepat -->
+    <div class="proc-tab-content" id="proc-tab-4">
+      <h3>📝 Kuis Cepat Modul 3</h3>
+      <div class="quick-quiz" id="quick-quiz-m3">
+        <div class="qq-item active" id="qq-1">
+          <p class="qq-question">Berapa kecepatan maksimum forklift di area pelabuhan?</p>
+          <div class="qq-options">
+            <button class="qq-opt" onclick="answerQQ(this, false)">5 km/jam</button>
+            <button class="qq-opt" onclick="answerQQ(this, true)">10 km/jam</button>
+            <button class="qq-opt" onclick="answerQQ(this, false)">20 km/jam</button>
+            <button class="qq-opt" onclick="answerQQ(this, false)">30 km/jam</button>
+          </div>
+          <div class="qq-feedback hidden" id="qf-1"></div>
+        </div>
+        <div class="qq-item" id="qq-2">
+          <p class="qq-question">Apa langkah pertama saat terjadi kebakaran di area bongkar muat?</p>
+          <div class="qq-options">
+            <button class="qq-opt" onclick="answerQQ(this, false)">Langsung gunakan APAR</button>
+            <button class="qq-opt" onclick="answerQQ(this, true)">Aktivasi alarm dan teriak "KEBAKARAN!"</button>
+            <button class="qq-opt" onclick="answerQQ(this, false)">Berlari keluar area</button>
+            <button class="qq-opt" onclick="answerQQ(this, false)">Hubungi atasan terlebih dahulu</button>
+          </div>
+          <div class="qq-feedback hidden" id="qf-2"></div>
+        </div>
+        <div class="qq-item" id="qq-3">
+          <p class="qq-question">Berapa maksimum tier (tumpukan) kontainer yang diizinkan?</p>
+          <div class="qq-options">
+            <button class="qq-opt" onclick="answerQQ(this, false)">2 tier</button>
+            <button class="qq-opt" onclick="answerQQ(this, false)">3 tier</button>
+            <button class="qq-opt" onclick="answerQQ(this, true)">4 tier</button>
+            <button class="qq-opt" onclick="answerQQ(this, false)">5 tier</button>
+          </div>
+          <div class="qq-feedback hidden" id="qf-3"></div>
+        </div>
+        <div class="qq-complete hidden" id="qq-complete">
+          <div class="complete-icon">✅</div>
+          <h3>Kuis Selesai!</h3>
+          <p id="qq-score-text"></p>
+          <button class="btn-primary" onclick="completeModule(3)">Lanjut ke Evaluasi Akhir →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: MODULE 4 – EVALUASI ===== -->
+<div id="screen-mod4" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="showScreen('screen-modules')">← Modul</button>
+    <h2>📝 Evaluasi Akhir K3</h2>
+    <div class="mod-badge" style="background:#8b5cf6">M4</div>
+  </div>
+  <div class="eval-container" id="eval-container">
+    <div class="eval-intro" id="eval-intro">
+      <div class="slide-icon-big">🏆</div>
+      <h2>Uji Kompetensi K3</h2>
+      <p>Jawab <strong>10 soal pilihan ganda</strong> berikut untuk menguji pemahaman Anda tentang Keselamatan dan Kesehatan Kerja pada Bongkar Muat.</p>
+      <div class="eval-rules">
+        <div class="rule-item">📊 10 Soal Pilihan Ganda</div>
+        <div class="rule-item">⏱ Tidak Ada Batas Waktu</div>
+        <div class="rule-item">✅ Nilai Lulus: ≥ 70</div>
+        <div class="rule-item">🏆 Sertifikat Otomatis</div>
+      </div>
+      <button class="btn-primary btn-glow" onclick="startEval()">Mulai Evaluasi →</button>
+    </div>
+    <div class="eval-quiz hidden" id="eval-quiz">
+      <div class="eval-progress">
+        <div class="eq-prog-bar"><div class="eq-prog-fill" id="eq-prog-fill"></div></div>
+        <span id="eq-prog-text">Soal 1 / 10</span>
+      </div>
+      <div class="eval-question" id="eval-question"></div>
+      <div class="eval-options" id="eval-options"></div>
+      <div class="eval-feedback hidden" id="eval-feedback"></div>
+      <button class="btn-primary hidden" id="btn-eq-next" onclick="nextEvalQ()">Soal Berikutnya →</button>
+    </div>
+    <div class="eval-result hidden" id="eval-result">
+      <div class="result-circle" id="result-circle">
+        <span class="result-score" id="result-score">0</span>
+        <span class="result-label">Nilai</span>
+      </div>
+      <h2 id="result-title"></h2>
+      <p id="result-desc"></p>
+      <div class="result-actions">
+        <button class="btn-secondary" onclick="retakeEval()">🔄 Ulangi Evaluasi</button>
+        <button class="btn-primary btn-glow" id="btn-cert" onclick="showScreen('screen-cert')" style="display:none">🏆 Lihat Sertifikat →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: SERTIFIKAT ===== -->
+<div id="screen-cert" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="showScreen('screen-mod4')">← Evaluasi</button>
+    <h2>🏆 Sertifikat Kelulusan</h2>
+    <div></div>
+  </div>
+  <div class="cert-container">
+    <div class="cert-card" id="cert-card">
+      <div class="cert-header">
+        <div class="cert-logo">⛑️</div>
+        <div class="cert-org">
+          <div class="cert-org-title">SERTIFIKAT KELULUSAN</div>
+          <div class="cert-org-sub">Pelatihan Mandiri K3 – Bongkar Muat</div>
+        </div>
+      </div>
+      <div class="cert-body">
+        <p class="cert-hereby">Dengan ini menyatakan bahwa:</p>
+        <div class="cert-name" id="cert-name">—</div>
+        <p class="cert-unit" id="cert-unit">—</p>
+        <p class="cert-desc">Telah menyelesaikan <strong>Pelatihan Mandiri Keselamatan dan Kesehatan Kerja (K3) Bongkar Muat</strong> melalui media pembelajaran interaktif berbasis multimedia dengan hasil:</p>
+        <div class="cert-score-badge">
+          <span id="cert-score-val">—</span>
+          <span class="csb-label">Nilai Akhir</span>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <div class="cert-date-area">
+          <div class="cert-date-label">Tanggal Selesai</div>
+          <div class="cert-date-val" id="cert-date">—</div>
+        </div>
+        <div class="cert-seal">
+          <div class="seal-ring">K3</div>
+          <div class="seal-text">LULUS</div>
+        </div>
+        <div class="cert-sig-area">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">HSE Supervisor</div>
+        </div>
+      </div>
+      <div class="cert-ribbon"></div>
+    </div>
+    <div class="cert-actions">
+      <button class="btn-primary" onclick="downloadCert()">⬇ Download Sertifikat</button>
+      <button class="btn-secondary" onclick="showScreen('screen-modules')">← Kembali ke Modul</button>
+    </div>
+    <p class="cert-note">💡 Untuk menyimpan sertifikat sebagai gambar, tekan tombol Download di atas atau gunakan screenshot browser Anda.</p>
+  </div>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-icon" id="modal-icon">✅</div>
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+    <button class="btn-primary" id="modal-btn" onclick="closeModal()">OK</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
